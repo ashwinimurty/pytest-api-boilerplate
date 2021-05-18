@@ -1,6 +1,5 @@
 import pytest, json
 from src.character_model import CharacterEP
-import requests
 
 get_obj = CharacterEP()
     
@@ -8,8 +7,7 @@ def test_character_endpoint():
     """
         Test Purpose: Test the character endpoint returns all characters
     """ 
-    req = get_obj.get().build_request()
-    resp = get_obj.last_get
+    resp = get_obj.get().last_get
     out = json.loads(resp.text)
     print("All the characters output is", json.loads(resp.text))
     ids = []
@@ -25,8 +23,7 @@ def test_single_character_endpoint():
        Test Purpose: Test the character endpoint returns a single character
     """
     #Using the input id 2
-    req = get_obj.get(2).build_request()
-    resp = get_obj.last_get
+    resp = get_obj.get(2).last_get
     out = json.loads(resp.text)
     print("Output for single character is", out)
     if out['id'] == 2:
@@ -39,8 +36,7 @@ def test_multiple_characters():
         Test Purpose: Test the character endpoint returns multiple characters
     """
     #using the input ids 1 and 3
-    req = get_obj.get([1,3]).build_request()
-    resp = get_obj.last_get
+    resp = get_obj.get([1,3]).last_get
     out = json.loads(resp.text)
     print("Output for multiple character is", out)
     #print("First ID",out[0]['id'])
