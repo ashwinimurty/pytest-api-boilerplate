@@ -1,14 +1,13 @@
 import pytest, json
 from src.character_model import CharacterEP
 import requests
-from requests import Request, Session
 
-
+get_obj = CharacterEP()
+    
 def test_character_endpoint():
     """
         Test Purpose: Test the character endpoint returns all characters
-    """
-    get_obj = CharacterEP()
+    """ 
     req = get_obj.get().build_request()
     resp = get_obj.last_get
     out = json.loads(resp.text)
@@ -17,7 +16,7 @@ def test_character_endpoint():
     for ele in out['results']:
         ids.append(ele['id'])
     print("ALL IDS", ids)
-    #assert based on the number of ids or the ids itself
+    #assert based on the number of ids or the values of the ids itself
     assert len(ids) == 20
 
 
@@ -25,7 +24,7 @@ def test_single_character_endpoint():
     """
        Test Purpose: Test the character endpoint returns a single character
     """
-    get_obj = CharacterEP()
+    #Using the input id 2
     req = get_obj.get(2).build_request()
     resp = get_obj.last_get
     out = json.loads(resp.text)
@@ -39,7 +38,6 @@ def test_multiple_characters():
     """
         Test Purpose: Test the character endpoint returns multiple characters
     """
-    get_obj = CharacterEP()
     #using the input ids 1 and 3
     req = get_obj.get([1,3]).build_request()
     resp = get_obj.last_get
